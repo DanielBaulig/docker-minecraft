@@ -1,5 +1,5 @@
-PROJECT=
-USERNAME=
+PROJECT=minecraft
+USERNAME=dbaulig
 IMAGE=$(USERNAME)/$(PROJECT)
 DOCKER=sudo docker
 
