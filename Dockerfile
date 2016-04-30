@@ -55,6 +55,15 @@ RUN mscs start
 ARG EULA=false
 RUN echo "eula=${EULA}" >${LOCATION}/worlds/${WORLD_NAME}/eula.txt
 
+# dump minecraft version. can be useful for tagging of the image
+    #alias exit, so sourcing msctl does not exit the shell
+RUN alias exit=true && \
+    # source msctl to get access to it's functions. redirect output, we don't
+    # need it.
+    . ${LOCATION}/msctl >/dev/null && \
+    # echo Minecraft version using msctl's getCurrentMinecraftVersion function
+    echo Minecraft Version: $(getCurrentMinecraftVersion ${WORLD_NAME})
+
 # Mount existing worlds that you want to run into this volume.
 VOLUME ${LOCATION}/worlds
 # Mount a location for your backups into this volume. Fair warning: rdiff-backup
